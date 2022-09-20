@@ -1,5 +1,6 @@
-#acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
-
+{
+    #acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
 # The Caddyfile is an easy way to configure your Caddy web server.
 #
 # Unless the file starts with a global options block, the first
