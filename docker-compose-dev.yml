@@ -10,31 +10,20 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   web:
-    build: .
+    build:
+        context: .
+        args:
+            DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+    ports:
+      - "8000:8000"
     environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - DJANGO_SECRET_KEY=django-insecure-eq#t)e=62cgn-g7i-+-%4#ol&l-sv&u0+n*m-u55*$$56+jv%ni
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
     depends_on:
       - db
-  caddy:
-    image: caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-      - ./Caddyfile:/etc/caddy/Caddyfile
-    depends_on:
-      - web
 
-volumes:
-  caddy_data:
-  caddy_config:

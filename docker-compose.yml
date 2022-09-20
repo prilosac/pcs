@@ -1,0 +1,46 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  web:
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+    build:
+        context: .
+        args:
+            DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+    command: gunicorn --bind :8080 pcs.wsgi
+    volumes:
+      - .:/code
+      - static:/code/staticfiles
+    depends_on:
+      - db
+  caddy:
+    image: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - static:/etc/static/pcs/static:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:
+  static:

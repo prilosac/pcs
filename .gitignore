@@ -131,7 +131,7 @@ dmypy.json
 Postgres Data File (Docker)
 data/*
 
-docker-compose.yml
 Caddyfile
+staticfiles/
 
 *.swp
