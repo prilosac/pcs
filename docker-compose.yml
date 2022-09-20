@@ -15,13 +15,15 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+      - DEV_ENV=${DEV_ENV}
     build:
         context: .
         args:
             DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
     command: gunicorn --bind :8080 pcs.wsgi
     volumes:
-      - .:/code
+#     - .:/code
       - static:/code/staticfiles
     depends_on:
       - db
