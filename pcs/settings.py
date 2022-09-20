@@ -26,6 +26,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.environ.get('DEV_ENV') else False
 
+CSRF_TRUSTED_ORIGINS = ['https://prilocontrol.com']
 ALLOWED_HOSTS = ['*']
 
 MEDIA_ROOT = '/home/prilo/pcs/media/'
