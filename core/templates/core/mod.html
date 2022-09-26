@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{object.name}}</h2>
+<h5>{{object.description}}</h5>
+
+<div class="row">
+{% for image in object.modimage_set.all %}
+    <div class="col-sm-6 col-md-4">
+        <div class="card mb-4 text-bg-dark">
+            <img src="{{image.image.url}}" class="card-img" alt="Mod Image">
+            <div class="card-img-overlay">
+                <h5 class="card-title">{{image.description}}</h5>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
