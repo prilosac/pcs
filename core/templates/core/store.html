@@ -10,15 +10,15 @@
             {% endwith %}
             <div class="card body text-bg-dark">
                 <h5 class="card-title text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">~${{controller.total_price}}</span></h5>
-                <div class="accordion text-bg-dark" id="storeAccordion">
+                <div class="accordion text-bg-dark" id="storeAccordion{{forloop.counter}}">
                     {% for mod in controller.mods.all %}
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading{{forloop.counter}}">
-                            <button class="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse{{forloop.counter}}">
+                        <h2 class="accordion-header" id="heading{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                            <button class="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.parentloop.counter}}-{{forloop.counter}}" aria-expanded="false" aria-controls="collapse{{forloop.parentloop.counter}}-{{forloop.counter}}">
                                 {{mod.name}}
                             </button>
                         </h2>
-                        <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse text-bg-dark" aria-labelledby="heading{{forloop.counter}}" data-bs-parent="#storeAccordion">
+                        <div id="collapse{{forloop.parentloop.counter}}-{{forloop.counter}}" class="accordion-collapse collapse text-bg-dark" aria-labelledby="heading{{forloop.parentloop.counter}}-{{forloop.counter}}" data-bs-parent="#storeAccordion{{forloop.parentloop.counter}}">
                             {% if mod.description %}
                             <div class="accordion-body">
                                 {{mod.description}}
