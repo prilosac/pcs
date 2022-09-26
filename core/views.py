@@ -4,6 +4,7 @@ from core.models import *
 
 def index(request):
     images = GalleryImage.objects.all()
+    context = {}
     if images:
         context = {'carousel_start': images[0], 'carousel_images': images[1:]}
 
