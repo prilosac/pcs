@@ -12,4 +12,4 @@ COPY ./pcs /code/pcs
 COPY ./media /code/media
 COPY ./static /code/static
 COPY ./templates /code/templates
-RUN python manage.py collectstatic
+RUN python manage.py collectstatic --no-input

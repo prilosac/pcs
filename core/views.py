@@ -4,7 +4,10 @@ from core.models import *
 
 def index(request):
     images = GalleryImage.objects.all()
-    return render(request, 'core/index.html', context={'carousel_start': images[0], 'carousel_images': images[1:]})
+    if images:
+        context = {'carousel_start': images[0], 'carousel_images': images[1:]}
+
+    return render(request, 'core/index.html', context=context)
 
 def profile(request):
     return render(request, 'core/profile.html')
