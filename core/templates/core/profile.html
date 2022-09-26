@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 name: {{ user.first_name }} {{ user.last_name }}<br>
 username: {{ user.username }}<br>
 email: {{ user.email}}<br>
+superuser: {{ user.is_superuser|yesno }}<br>
+staff: {{ user.is_staff|yesno }}<br>
+{% if user.is_superuser %}<br>
+<a href="/admin">admin</a><br>
+{% endif %}
 
 {% endblock %}

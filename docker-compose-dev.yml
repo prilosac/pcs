@@ -15,8 +15,9 @@ services:
         args:
             DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
     command: python manage.py runserver 0.0.0.0:8000
-#    volumes:
-#      - .:/code
+    volumes:
+      - .:/code
+      - media:/code/media
     ports:
       - "8000:8000"
     environment:
@@ -29,3 +30,5 @@ services:
     depends_on:
       - db
 
+volumes:
+  media:

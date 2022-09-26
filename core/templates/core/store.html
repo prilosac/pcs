@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-STORE
+<div class="row">
+{% for controller in controllers %}
+    <div class="col-sm-6 col-md-4">
+        <div class="card mb-4 text-bg-dark">
+            {% with controller.controllerimage_set.all|first as image %}
+            <img src="{{ image.image.url }}" class="card-img" alt="Store Image">
+            {% endwith %}
+            <div class="card body text-bg-dark">
+                <h5 class="card-title text-bg-dark">{{controller.name}}</h5>
+                <ul class="list-group">
+                    {% for mod in controller.mods.all %}
+                    <li class="list-group-item text-bg-dark">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">{{ mod.name }}</div>
+                            {{ mod.description }}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
 {% endblock %}

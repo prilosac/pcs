@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     {% load static %}
@@ -16,6 +17,9 @@
     <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">LT</a>
+            <div class="navbar-text d-sm-none float-end">
+                Prilo's Controllers
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,9 +37,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/mods">Mods Home</a></li>
-                            <li><a class="dropdown-item" href="#">Mod 1...</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Mod 1...</a></li>
                             <li><a class="dropdown-item" href="#">Mod 2...</a></li>
-                            <li><a class="dropdown-item" href="#">Mod 3...</a></li>
+                            <li><a class="dropdown-item" href="#">Mod 3...</a></li> -->
                         </ul>
                     </li>
                     {% if user.is_authenticated %}
@@ -64,17 +68,18 @@
                 </form>
                 -->
             </div>
+            <div class="navbar-text d-none d-sm-block float-end">
+                Prilo's Controllers
+            </div>
         </div>
     </nav>
 </section>
-<body>
+<body class="bg-dark text-light">
+    <div class="mb-4">{% block homeCarousel %}{% endblock %}</div>
     <div class="container">{% block content %}{% endblock %}</div>
 </body>
 
 </html>
 
 <script>
-document.querySelector('.first-button').addEventListener('click', function () {
-    document.querySelector('.animated-icon1').classList.toggle('open');
-});
 </script>

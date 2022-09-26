@@ -29,7 +29,7 @@ DEBUG = True if os.environ.get('DEV_ENV') else False
 CSRF_TRUSTED_ORIGINS = ['https://prilocontrol.com']
 ALLOWED_HOSTS = ['*']
 
-MEDIA_ROOT = '/home/prilo/pcs/media/'
+MEDIA_ROOT = '/code/media'
 MEDIA_URL = '/media/'
 
 LOGOUT_REDIRECT_URL = '/'

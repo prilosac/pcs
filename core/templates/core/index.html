@@ -1,5 +1,26 @@
 {% extends "base.html" %}
 
+{% block homeCarousel %}
+<div id="carouselHome" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        {% for image in carousel_images %}
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="{{forloop.counter0|add:1}}" class="active" aria-current="true" aria-label="Slide {{forloop.counter|add:1}}"></button>
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{carousel_start.image.url}}" class="d-block w-100" alt="Home Carousel Image" height="500" style="object-fit: cover;">
+        </div>
+        {% for image in carousel_images %}
+        <div class="carousel-item">
+            <img src="{{image.image.url}}" class="d-block w-100" alt="Home Carousel Image"height="500" style="object-fit: cover;">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
-Welcome to Prilo's Controller Shop!
+<h2 style="text-align: center;">Stop blaming your controller</h2>
 {% endblock %}

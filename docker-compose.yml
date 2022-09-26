@@ -23,8 +23,9 @@ services:
             DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
     command: gunicorn --bind :8080 pcs.wsgi
     volumes:
-#     - .:/code
+      - .:/code
       - static:/code/staticfiles
+      - media:/code/media
     depends_on:
       - db
   caddy:
@@ -46,3 +47,4 @@ volumes:
   caddy_data:
   caddy_config:
   static:
+  media:
