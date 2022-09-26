@@ -38,7 +38,9 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/mods">Mods Home</a></li>
                             {% for mod in nav_mods %}
+                            {% if mod.display_nav %}
                             <li><a class="dropdown-item" href="/mods/{{mod.slug}}">{{mod.name}}</a></li>
+                            {% endif %}
                             {% endfor %}
                         </ul>
                     </li>
