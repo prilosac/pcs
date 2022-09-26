@@ -9,17 +9,25 @@
             <img src="{{ image.image.url }}" class="card-img" alt="Store Image">
             {% endwith %}
             <div class="card body text-bg-dark">
-                <h5 class="card-title text-bg-dark">{{controller.name}}</h5>
-                <ul class="list-group">
+                <h5 class="card-title text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">~${{controller.total_price}}</span></h5>
+                <div class="accordion text-bg-dark" id="storeAccordion">
                     {% for mod in controller.mods.all %}
-                    <li class="list-group-item text-bg-dark">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{ mod.name }}</div>
-                            {{ mod.description }}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{forloop.counter}}">
+                            <button class="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse{{forloop.counter}}">
+                                {{mod.name}}
+                            </button>
+                        </h2>
+                        <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse text-bg-dark" aria-labelledby="heading{{forloop.counter}}" data-bs-parent="#storeAccordion">
+                            {% if mod.description %}
+                            <div class="accordion-body">
+                                {{mod.description}}
+                            </div>
+                            {% endif %}
                         </div>
-                    </li>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
     </div>

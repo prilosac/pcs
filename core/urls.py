@@ -1,11 +1,12 @@
 from django.urls import path
-
+from django.urls import re_path as url
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('accounts/profile/', views.profile, name='profile'),
-    path('gallery/', views.gallery, name='gallery'),
-    path('store/', views.store, name='store'),
-    path('mods/', views.mods, name='mods'),
+    url(r'^$', views.index, name='index'),
+    url(r'^accounts/profile/$', views.profile, name='profile'),
+    url(r'^gallery/$', views.gallery, name='gallery'),
+    url(r'^store/$', views.store, name='store'),
+    url(r'^mods/$', views.mods, name='mods'),
+    url(r'^mods/(?P<slug>[\w.\-]+)/$', views.ModView.as_view()),
 ]

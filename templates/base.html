@@ -37,9 +37,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/mods">Mods Home</a></li>
-                            <!-- <li><a class="dropdown-item" href="#">Mod 1...</a></li>
-                            <li><a class="dropdown-item" href="#">Mod 2...</a></li>
-                            <li><a class="dropdown-item" href="#">Mod 3...</a></li> -->
+                            {% for mod in nav_mods %}
+                            <li><a class="dropdown-item" href="/mods/{{mod.slug}}">{{mod.name}}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                     {% if user.is_authenticated %}

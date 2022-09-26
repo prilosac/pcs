@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.detail import DetailView
 from core.models import *
 
 def index(request):
@@ -14,8 +15,22 @@ def gallery(request):
 
 def store(request):
     controllers = Controller.objects.filter(hidden=False)
+    for controller in controllers:
+        price = controller.price - controller.discount
+        for mod in controller.mods.all():
+            price += mod.price
+
+        controller.total_price = price
     return render(request, 'core/store.html', context={'controllers': controllers})
 
 def mods(request):
     return render(request, 'core/mods.html')
+
+class ModView(DetailView):
+    model = Mod
+    template_name='core/mod.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 

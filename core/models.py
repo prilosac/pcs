@@ -27,6 +27,7 @@ class Mod(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=14, decimal_places=2, default=0)
+    slug = models.SlugField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -58,7 +59,7 @@ def image_upload_path(instance, filename):
             )
 
 class Image(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to=image_upload_path)
 
@@ -70,10 +71,18 @@ class Image(models.Model):
 
 class ControllerImage(Image):
     controller = models.ForeignKey('Controller', on_delete=models.DO_NOTHING)
+    primary = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{} {}'.format(self.controller.name, 'primary' if self.primary else 'secondary')
 
 class ModImage(Image):
     mod = models.ForeignKey('Mod', on_delete=models.DO_NOTHING)
+    primary = models.BooleanField(default=False)
     
+    def __str__(self):
+        return '{} {}'.format(self.mod.name, 'primary' if self.primary else 'secondary')
+
 class GalleryImage(Image):
     pass
 
