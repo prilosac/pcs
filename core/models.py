@@ -19,6 +19,7 @@ class Controller(models.Model):
     discount = models.DecimalField(max_digits=14, decimal_places=2)
     mods = models.ManyToManyField('Mod')
     hidden = models.BooleanField(default=True)
+    stock = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name
