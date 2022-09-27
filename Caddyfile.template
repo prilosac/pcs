@@ -20,10 +20,10 @@ file_server
 
 @notStatic {
     not path /static/*
+    not path /media/*
 }
 
 # Another common task is to set up a reverse proxy:
-#reverse_proxy @notStatic web:8080
 reverse_proxy @notStatic web:8080
 
 
