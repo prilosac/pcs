@@ -12,6 +12,9 @@
             {% else %}
             <h5 class="card-title mt-2 text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">SOLD OUT</span></h5>
             {% endif %}
+            {% if controller.description %}
+            <p class="card-text">{{controller.description}}</p>
+            {% endif %}
             <div class="accordion accordion-flush text-bg-dark" id="storeAccordion{{forloop.counter}}" style="--bs-accordion-bg:none;">
                 {% for mod in controller.mods.all %}
                 <div class="accordion-item">
