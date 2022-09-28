@@ -15,6 +15,7 @@ class Controller(models.Model):
 
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=20, choices=CONTROLLER_TYPE_CHOICES)
+    description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=14, decimal_places=2)
     discount = models.DecimalField(max_digits=14, decimal_places=2)
     mods = models.ManyToManyField('Mod', blank=True)
@@ -69,7 +70,10 @@ class Image(models.Model):
         abstract = True
     
     def __str__(self):
-        return self.title
+        if self.title:
+            return self.title
+        else:
+            return "Unknown"
 
 class ControllerImage(Image):
     controller = models.ForeignKey('Controller', on_delete=models.DO_NOTHING)
