@@ -17,7 +17,7 @@ class Controller(models.Model):
     type = models.CharField(max_length=20, choices=CONTROLLER_TYPE_CHOICES)
     price = models.DecimalField(max_digits=14, decimal_places=2)
     discount = models.DecimalField(max_digits=14, decimal_places=2)
-    mods = models.ManyToManyField('Mod')
+    mods = models.ManyToManyField('Mod', blank=True)
     hidden = models.BooleanField(default=True)
     stock = models.IntegerField(default=1)
 

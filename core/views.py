@@ -25,6 +25,7 @@ def store(request):
             price += mod.price
 
         controller.total_price = price
+        controller.store_image = controller.controllerimage_set.filter(primary=True).first()
     return render(request, 'core/store.html', context={'controllers': controllers})
 
 def mods(request):
@@ -32,9 +33,26 @@ def mods(request):
 
 class ModView(DetailView):
     model = Mod
-    template_name='core/mod.html'
+    slug_field = 'slug'
+    template_name = 'core/mod.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
+class ControllerView(DetailView):
+    model = Controller
+    pk_url_kwarg = 'pk'
+    template_name = 'core/controller.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #context['primary_image'] = self.object.controllerimage_set.filter(primary=True).first()
+        price = self.object.price - self.object.discount
+        for mod in self.object.mods.all():
+            price += mod.price
+
+        self.object.total_price = price
+        self.object.store_image = self.object.controllerimage_set.filter(primary=True).first()
+        return context
+    
