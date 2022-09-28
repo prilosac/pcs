@@ -34,19 +34,23 @@
     </div>
 </div>
 
-{% for image in controller.controllerimage_set.all %}
-    {% if image.image.url != controller.store_image.image.url %}
-    <div class="col-sm-6 col-lg-4">
-        <div class="card mb-4 text-bg-dark">
-            <img src="{{image.image.url}}" class="card-img" alt="Gallery Image">
-            {% if image.title %}
-            <div class="card-img-overlay">
-                <h5 class="card-title">{{image.title}}</h5>
+<div class="col-sm-6 col-md-8">
+    <div class="row">
+    {% for image in controller.controllerimage_set.all %}
+        {% if image.image.url != controller.store_image.image.url %}
+        <div class="col-md-6 col-xl-4">
+            <div class="card mb-4 text-bg-dark">
+                <img src="{{image.image.url}}" class="card-img" alt="Gallery Image">
+                {% if image.title %}
+                <div class="card-img-overlay">
+                    <h5 class="card-title">{{image.title}}</h5>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
+        {% endif %}
+    {% endfor %}
     </div>
-    {% endif %}
-{% endfor %}
+</div>
 </div>
 {% endblock %}
