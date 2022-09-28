@@ -6,9 +6,11 @@
     <div class="col-sm-6 col-lg-4">
         <div class="card mb-4 text-bg-dark">
             <img src="{{image.image.url}}" class="card-img" alt="Gallery Image">
+            {% if image.title %}
             <div class="card-img-overlay">
                 <h5 class="card-title">{{image.title}}</h5>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endfor %}
