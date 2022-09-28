@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-6 col-md-4">
+    <div class="card mb-4 text-bg-dark">
+        <img src="{{ object.store_image.image.url }}" class="card-img-top" alt="Store Image">
+        <div class="card body text-bg-dark">
+            {% if controller.stock > 0 %}
+            <a href="{{controller.pk}}" style="text-decoration: none;">
+                <h5 class="card-title mt-2 text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">~${{controller.total_price}}</span></h5>
+            </a>
+            {% else %}
+            <h5 class="card-title mt-2 text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">SOLD OUT</span></h5>
+            {% endif %}
+            <div class="accordion accordion-flush text-bg-dark" id="storeAccordion{{forloop.counter}}" style="--bs-accordion-bg:none;">
+                {% for mod in controller.mods.all %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                        <button class="accordion-button collapsed text-bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.parentloop.counter}}-{{forloop.counter}}" aria-expanded="false" aria-controls="collapse{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                            {{mod.name}}
+                        </button>
+                    </h2>
+                    <div id="collapse{{forloop.parentloop.counter}}-{{forloop.counter}}" class="accordion-collapse collapse text-bg-dark" aria-labelledby="heading{{forloop.parentloop.counter}}-{{forloop.counter}}" data-bs-parent="#storeAccordion{{forloop.parentloop.counter}}">
+                        {% if mod.description %}
+                        <div class="accordion-body">
+                            {{mod.description}}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for image in object.controllerimage_set.all %}
+    {% if image.image.url != object.store_image.image.url %}
+    <div class="col-sm-6 col-lg-4">
+        <div class="card mb-4 text-bg-dark">
+            <img src="{{image.image.url}}" class="card-img" alt="Gallery Image">
+            <div class="card-img-overlay">
+                <h5 class="card-title">{{image.title}}</h5>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
