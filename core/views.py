@@ -18,7 +18,7 @@ def gallery(request):
     return render(request, 'core/gallery.html', context={'images': images})
 
 def store(request):
-    controllers = Controller.objects.filter(hidden=False)
+    controllers = Controller.objects.filter(hidden=False).order_by('display_tier')
     for controller in controllers:
         price = controller.price - controller.discount
         for mod in controller.mods.all():

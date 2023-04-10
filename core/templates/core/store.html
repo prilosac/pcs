@@ -23,19 +23,23 @@
     <div class="col-sm-6 col-md-4">
         <div class="card mb-4 text-bg-dark">
             <a href="{{controller.pk}}" style="text-decoration: none;">
+              {% if controller.store_image.image.url %}
                 <img src="{{ controller.store_image.image.url }}" class="card-img-top" alt="Store Image">
+              {% else %}
+                <b>NO IMAGE FOUND</b>
+              {% endif %}
             </a>
             <div class="card body text-bg-dark">
                 {% if controller.stock > 0 %}
                 <a href="{{controller.pk}}" style="text-decoration: none;">
-                    <h5 class="card-title mt-2 text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">~${{controller.total_price}}</span></h5>
+                    <h5 class="card-title mt-2 mx-2 text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">~${{controller.total_price}}</span></h5>
                 </a>
-                <p class="card-text"><small class="text-white-50">Stock: {{controller.stock}}</small></p>
+                <p class="card-text mx-2"><small class="text-white-50">Stock: {{controller.stock}}</small></p>
                 {% else %}
                 <h5 class="card-title mt-2 text-bg-dark">{{controller.name}} <span class="badge ml-2 text-bg-light">SOLD OUT</span></h5>
                 {% endif %}
                 {% if controller.description %}
-                <p class="card-text">{{controller.description}}</p>
+                <p class="card-text mx-2">{{controller.description}}</p>
                 {% endif %}
                 <div class="accordion accordion-flush text-bg-dark" id="storeAccordion{{forloop.counter}}" style="--bs-accordion-bg:none;">
                     {% for mod in controller.mods.all %}

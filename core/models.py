@@ -21,6 +21,8 @@ class Controller(models.Model):
     mods = models.ManyToManyField('Mod', blank=True)
     hidden = models.BooleanField(default=True)
     stock = models.IntegerField(default=1)
+    display_tier = models.IntegerField(default=100)
+    """lower tiers will be shown first, order within tiers undefined"""
 
     def __str__(self):
         return self.name
