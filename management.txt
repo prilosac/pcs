@@ -1,0 +1,5 @@
+### Start docker daemon (WSL)
+sudo service docker start
+
+### Start the server
+docker compose -f <compose-file> up
